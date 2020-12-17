@@ -21,7 +21,7 @@ def get_feedback_blocks(mat_file):
     '''
 
 
-    mat = sio.loadmat(mat_file,chars_as_strings=True,variable_names="condition",simplify_cells=True)
+    mat = sio.loadmat(mat_file,chars_as_strings=True,variable_names="condition")
     condition = mat["condition"].reshape(-1,1)
     condition = np.concatenate((condition,np.zeros((1,1))),axis=0)
     sync_onset=[]

@@ -26,9 +26,9 @@ def get_response_onsets(log):
         for line in log_file:
             line = line.replace("\n","").split("\t")
             if(line[2]=="Keypress: 1"):
-                mine_onsets.append(line[0])
+                mine_onsets.append(float(line[0].replace(" ","")))
             elif(line[2]=="Keypress: 2"):
-                other_onsets.append(line[0])
+                other_onsets.append(float(line[0].replace(" ","")))
             
         onsets = {"subject":log[-12:-7],
                     "mine_onset":mine_onsets,
