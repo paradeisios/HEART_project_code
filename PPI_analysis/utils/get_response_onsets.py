@@ -19,19 +19,30 @@ def get_response_onsets(log):
     for OTHER.
     
     """
+    data = []
     with open(log,"r") as log_file:
-
-        mine_onsets = []
-        other_onsets = []
         for line in log_file:
+            data.append(line)
+        
+
+    mine_onsets = []
+    other_onsets = []
+
+    for ii in range(len(data)):
+
+
+        if ('MINEOTHER' in data[ii]) and ('Finished' in data[ii]):
+
+            line = data[ii-2]                    
             line = line.replace("\n","").split("\t")
+
             if(line[2]=="Keypress: 1"):
                 mine_onsets.append(float(line[0].replace(" ","")))
             elif(line[2]=="Keypress: 2"):
                 other_onsets.append(float(line[0].replace(" ","")))
+
+    onsets = {"subject":log[-12:-7],
+                "mine_onset":mine_onsets,
+                "other_onset":other_onsets}
             
-        onsets = {"subject":log[-12:-7],
-                    "mine_onset":mine_onsets,
-                    "other_onset":other_onsets}
-            
-        return onsets
+    return onsets
