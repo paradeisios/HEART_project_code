@@ -55,10 +55,10 @@ def get_feedback_blocks(mat_file):
             async_duration.append(count-1)
         
     blocks = {"name":mat_file[-12:-7],
-          "sync_onset":sync_onset,
-          "sync_duration":sync_duration,
-          "async_onset":async_onset,
-          "async_duration":async_duration}
+          "sync_onset":np.array(sync_onset),
+          "sync_duration":np.array(sync_duration),
+          "async_onset":np.array(async_onset),
+          "async_duration":np.array(async_duration)}
     
     return blocks
 
