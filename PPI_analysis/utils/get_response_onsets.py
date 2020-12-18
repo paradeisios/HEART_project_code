@@ -22,6 +22,7 @@ def get_response_onsets(mat_file):
     
     """
     
+    mat_file = mat_file
     mat = sio.loadmat(mat_file)
     blocks = get_feedback_blocks(mat_file)
     onsets = np.concatenate((blocks["sync_onset"]+blocks["sync_duration"],
@@ -30,14 +31,14 @@ def get_response_onsets(mat_file):
     mine_onset = []
     other_onset = []            
     for onset in onsets:
-        if mat["response"][onset] == "Mine ":
+        if mat["response"][onset-1] == "Mine ":
             mine_onset.append(onset)
         else:
             other_onset.append(onset)
-    
+
     onsets = {"name":mat_file[-12:-7],
-              "mine_onsets":np.array(mine_onset),
-              "other_onsets":np.array(other_onset)}
-                            
-            
+              "mine_onsets":np.sort(np.array(mine_onset)),
+              "other_onsets":np.sort(np.array(other_onset))}
+
+
     return onsets
