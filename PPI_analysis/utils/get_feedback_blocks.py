@@ -42,7 +42,7 @@ def get_feedback_blocks(mat_file):
             while(condition[position] == "SYNC "):
                 count+=1
                 position+=1
-            sync_duration.append(count)
+            sync_duration.append(count-1)
        
         if (condition[index] == "OSYNC") and (condition[index-1]!="OSYNC"):
             async_onset.append(index+1)
@@ -52,7 +52,7 @@ def get_feedback_blocks(mat_file):
             while(condition[position] == "OSYNC"):
                 count+=1
                 position+=1
-            async_duration.append(count)
+            async_duration.append(count-1)
         
     blocks = {"name":mat_file[-12:-7],
           "sync_onset":sync_onset,
