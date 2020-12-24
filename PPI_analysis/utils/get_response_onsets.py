@@ -31,7 +31,7 @@ def get_response_onsets(mat_file):
     mine_onset = []
     other_onset = []            
     for onset in onsets:
-        if mat["response"][onset-1] == "Mine ":
+        if mat["response"][onset-1] in 'Mine   ' :
             mine_onset.append(onset)
         else:
             other_onset.append(onset)
