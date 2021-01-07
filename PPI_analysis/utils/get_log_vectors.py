@@ -59,7 +59,7 @@ def get_log_vectors(log):
     for ii in range(len(data)):
         
         # find line in logfiles that indicates block ONSET
-        if ("Started" in data[ii][-1]) or ("INSTRUCTION" in data[ii][-1]):
+        if ("Started" in data[ii][-1]) and ("INSTRUCTION" not in data[ii][-1]):
             
             # while searching, the script will look forward an index to find 
             # the first keypress (indicating the onset of the block)
@@ -77,7 +77,7 @@ def get_log_vectors(log):
                 async_onset.append(data[index][0])
         
         # find line in logfiles that indicates block END
-        if "Finished" in data[ii][-1]:
+        if ("Finished" in data[ii][-1]) and ("INSTRUCTION" not in data[ii][-1]) :
             
             # while searching, the script will look backward an index to find 
             # the first keypress (indicating the onset of the block)
@@ -108,5 +108,6 @@ def get_log_vectors(log):
                "async_duration" : async_duration,
                "mine"           : mine,
                "other"          : other}
-
+    
     return vectors
+
