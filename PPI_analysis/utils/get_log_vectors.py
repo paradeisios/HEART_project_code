@@ -9,6 +9,31 @@ Created on Thu Jan  7 14:25:00 2021
 import numpy as np
 
 def get_log_vectors(log):
+
+    """
+    A function that extracts MINE/OTHER responses and SYNC/ASYNC blocks onsets 
+    and durations from the HEART logfiles.
+    i. A reference is specified as the start of the experiment. The reference is the first Keypress: 5
+    
+    ii. To find MINE/OTHER response times, the function loops over the logfile and finds whether the 
+    subject pressed Keypress: 1 (MINE) or Keypress: 2 (OTHER).
+    
+    iii. To find SYNC/ASYNC block onsets, the function loops over the logfile and finds the first Keypress: 5 in the block,
+    by finding the onset timing of the block (specified in the logfile as Started) and going forwards, searching for the 
+    first keypress 5.
+    
+    iv. To find SYNC/ASYNC duration, the function loops over the logfile and finds the final Keypress: 5 in the block,
+    by finding the last timing of the block (specified in the logfile as Finished) and going backwards, searching for the 
+    first keypress 5. Then the onsets are substracted from the endings of the block
+    
+    The reference is substracted from both MINE/OTHER and SYNC/ASYNC vectors.
+    
+    INPUT: Log_file (Log) ----  Log file containg experiment data
+    
+    OUTPUT: vectors(dict) ----Dictionary with the number of the subject and  the 2 onset lists 
+    for MINE/OTHER responses,  and 2 onset lists and 2 duration lists for SYNC/ASYNC blocks.
+    """
+
     
     # Get the data from the log file and clean them a bit
     data = []

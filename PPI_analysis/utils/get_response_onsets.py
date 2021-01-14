@@ -10,21 +10,21 @@ from utils.get_feedback_blocks import get_feedback_blocks
 def get_response_onsets(mat_file):
     
     """
-    A function that loops over a single suvbject log file 
-    from the HEART recordings and returns the timing of the 
-    decision key presses (whether response was MINE or OTHER)
+    A function that extracts MINE/OTHER responses for the HEART experiment.
+    The function estimates when the blocks started based on the get_feedback_block
+    function. Then,based on the indexes of the final scan of the block, it finds 
+    whether the subject responded as mine or other.
     
-    INPUT: log (log file) ----  Log file containg experiment data
+    INPUT: mat_file (mat) ----  Mat file containg experiment data
     
     OUTPUT: onsets(dict) ---- Dictionary with the number of the 
-    subjectand the 2 onset lists, one for MINE responses and one 
+    subject and the 2 onset lists, one for MINE responses and one 
     for OTHER.
     
     """
     
-    mat_file = mat_file
     mat = sio.loadmat(mat_file)
-    blocks = get_feedback_blocks(mat_file)
+    blocks = get_feedback_blocks(mat_file) 
     onsets = np.concatenate((blocks["sync_onset"]+blocks["sync_duration"],
                              blocks["async_onset"]+blocks["async_duration"]),
                              axis=None)

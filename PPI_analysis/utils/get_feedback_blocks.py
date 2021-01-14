@@ -7,12 +7,11 @@ import numpy as np
 def get_feedback_blocks(mat_file):
     
     '''
-    A function that loops over a single suvbject matfile from the HEART 
-    recordings, containing the task tyoe and the feedback condition per fMRI 
-    scan and returns the onset and the duration of the feedback block (SYNC /
-    ASYNC)
+    A function that loops over a single subject matfile from the HEART 
+    recordings, finding the first scan of each SYNC/ASYNC block(onset)
+    and subsequently, counting how many tags belong to that block(duration).
 
-    INPUT: log (mat_file) ---- Mat file containg experiment data
+    INPUT: mat_file (mat) ---- Mat file containg experiment data
 
     OUTPUT: onsets(dict) ---- Dictionary with the number of the subject,
     2 onset lists and 2 duration lists, one for each feedback condition.
@@ -59,6 +58,6 @@ def get_feedback_blocks(mat_file):
           "sync_duration":np.array(sync_duration),
           "async_onset":np.array(async_onset),
           "async_duration":np.array(async_duration)}
-    
+       
     return blocks
 
